@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private string[] levelScenes = { "EmptyLevel", "Level01" };
 
-    // Update is called once per frame
-    void Update()
+    // Begin a game, using the board corresponding to the given ID
+    public void LoadLevel(int levelNum)
     {
-        
+        SceneManager.LoadScene(levelScenes[levelNum]);
     }
 }

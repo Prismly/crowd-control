@@ -34,10 +34,4 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
-
-    // Begin a game, using the board corresponding to the given ID
-    public void StartGame(int levelID)
-    {
-        Debug.Log("Nothing here yet!");
-    }
 }
