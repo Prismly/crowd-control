@@ -1,37 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenuUI;
-    [SerializeField] private GameObject levelSelectUI;
+    [SerializeField] private TextMeshProUGUI currentScoreDisp;
+    [SerializeField] private TextMeshProUGUI targetScoreDisp;
 
-    public void MoveToLevelSelect()
+    private void Start()
     {
-        // Hide all Main Menu buttons and text
-        mainMenuUI.SetActive(false);
-
-        // TODO: transition lerping between different menus, currently instant
-
-        // Reveal all Level Select buttons and text
-        levelSelectUI.SetActive(true);
+        targetScoreDisp.text = GameManager.GetTargetScore().ToString();
     }
 
-    public void MoveToMainMenu()
+    private void Update()
     {
-        // Hide all Main Menu buttons and text
-        levelSelectUI.SetActive(false);
-
-        // TODO: transition lerping between different menus, currently instant
-
-        // Reveal all Level Select buttons and text
-        mainMenuUI.SetActive(true);
-    }
-
-    // Closes the game
-    public void QuitGame()
-    {
-        Application.Quit();
+        currentScoreDisp.text = GameManager.GetScore().ToString();
     }
 }

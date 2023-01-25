@@ -17,6 +17,9 @@ public class Marble : MonoBehaviour
     {
         if (gameObject.transform.position.y < DespawnHeightY)
         {
+            // Marble is sufficiently low enough to be eaten; send its cooked-ness to the Game Manager for scoring and destroy it
+            Heatable heatComp = GetComponent<Heatable>();
+            GameManager.ScoreMarble(heatComp.CalcCookDegree());
             Destroy(gameObject);
         }
     }

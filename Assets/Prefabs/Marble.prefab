@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 2286093084047099136}
   - component: {fileID: 9218250026482562333}
   - component: {fileID: 7119890488088562197}
-  m_Layer: 0
+  - component: {fileID: 9165225339823905069}
+  m_Layer: 6
   m_Name: Marble
-  m_TagString: Untagged
+  m_TagString: Marble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,3 +129,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DespawnHeightY: -2
+--- !u!114 &9165225339823905069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160070286595266413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da897a4eea7e0964ba963de2e9636f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawTemp: 0
+  doneTemp: 5
+  burntTemp: 10
