@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ContinuousSpawner : MonoBehaviour
 {
-    public float SpawnIntervalSeconds = 0.3f;
     public float SpawnTotalDurationSeconds = 5.0f;
+    public bool UseInterval = false;
+    public int BallCount = 50;
+    public float SpawnIntervalSeconds = 0.3f;
     public GameObject ObjectToSpawn;
     public bool StartImmediately = true;
+    public bool DoRandomStartVelocity = true;
+    public float minVelocIntensity = 0.0f;
+    public float maxVelocIntensity = 2.0f;
 
     private Vector3 spawnPosition;
 
@@ -22,9 +27,28 @@ public class ContinuousSpawner : MonoBehaviour
         timeSinceSpawnStart = 0.0f;
     }
 
+    private void spawnMarble()
+    {
+        GameObject spawnedMarble = Instantiate(ObjectToSpawn, spawnPosition, Quaternion.identity);
+
+        if (DoRandomStartVelocity)
+        {
+            Vector2 randVeloc2D = Random.insideUnitCircle;
+            //Must not be upward
+            randVeloc2D.y = 0f - Mathf.Abs(randVeloc2D.y);
+            Vector3 randVeloc = new Vector3(randVeloc2D.x, randVeloc2D.y, 0);
+            float randIntensity = Random.Range(0.0f, maxVelocIntensity);
+            spawnedMarble.GetComponent<Rigidbody>().velocity = (randVeloc * randIntensity);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        if (!UseInterval)
+        {
+            SpawnIntervalSeconds = SpawnTotalDurationSeconds / (float)BallCount;
+        }
         SetSpawnActive(StartImmediately);
         spawnPosition = gameObject.transform.position;
     }
@@ -40,7 +64,8 @@ public class ContinuousSpawner : MonoBehaviour
 
             if (timeSinceLastSpawn >= SpawnIntervalSeconds)
             {
-                Instantiate(ObjectToSpawn, spawnPosition, Quaternion.identity);
+                spawnMarble();
+
                 timeSinceLastSpawn -= SpawnIntervalSeconds;
             }
             if (timeSinceSpawnStart >= SpawnTotalDurationSeconds)
