@@ -10,18 +10,26 @@ public static class GameManager
 
     // The theoretical maximum number of points gained per marble, if cooked optimally.
     private static float score = 0;
-    private static float scoreFactor = 100f;
-    private static float negativeScoreFactor = -5f;
+    private static float doneScore = 100f;
+    private static float burntScore = -25f;
+    private static float rawScore = -5f;
 
-    public static void ScoreMarble(bool isCooked)
+    public static void ScoreMarble(Heatable heatComp)
     {
-        if (isCooked)
+        if (heatComp.GetIsDone() && !heatComp.GetIsBurnt())
         {
-            score += scoreFactor;
+            // Well cooked. Award max points!!
+            score += doneScore;
+        }
+        else if (heatComp.GetIsBurnt())
+        {
+            // Burnt. Big point deduction!
+            score += burntScore;
         }
         else
         {
-            score += negativeScoreFactor;
+            // Somewhat raw. Small point deduction...
+            score += rawScore;
         }
     }
 

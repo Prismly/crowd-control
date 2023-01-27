@@ -21,7 +21,7 @@ public class HeatZone : MonoBehaviour
         Heatable heatComponent = other.gameObject.GetComponent<Heatable>();
         if (heatComponent != null)
         {
-            heatComponent.IncrementTemp(heatPerSec * Time.deltaTime);
+            heatComponent.CookFood(heatPerSec * Time.deltaTime);
         }
     }
 }

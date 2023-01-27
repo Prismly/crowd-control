@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawTemp: 0
-  doneTemp: 5
-  burntTemp: 10
+  currentTemp: 0
+  doneTemp: 100

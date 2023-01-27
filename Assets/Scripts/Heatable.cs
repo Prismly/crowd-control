@@ -5,11 +5,12 @@ using UnityEngine;
 public class Heatable : MonoBehaviour
 {
     [SerializeField] private float rawTemp;
+    private float currentTemp;
     [SerializeField] private float doneTemp;
-    [SerializeField] private float burntTemp;
-    [SerializeField] private float currentTemp;
 
-    // NOTE: Specifying a "keyframe" for raw, done, AND burnt means that it is possible for cooking or burning to visually appear faster. Possibly undesirable?
+    private bool isDone = false;
+    private bool isBurnt = false;
+
     private Color rawColor = new Color(253f / 255f, 155f / 255f, 154f / 255f);
     private Color doneColor = new Color(158f / 255f, 85f / 255f, 79f / 255f);
     private Color burntColor = new Color(63f / 255f, 15f / 255f, 0f / 255f);
@@ -25,44 +26,61 @@ public class Heatable : MonoBehaviour
         }
     }
 
-    // Calculate the "cook degree", a value from 0 to 1 that represents how close to the target temperature (0.5) a Heatable is.
-    // This value is used for determining the Heatable's color, and how much score it awards on consumption.
+    // Calculate the "cook degree", a value from 0 to 1 that represents how close to being done (1.0) a Heatable is.
+    // This value is used for determining the Heatable's color.
     public float CalcCookDegree()
     {
-        if (currentTemp < doneTemp)
+        return (currentTemp - rawTemp) / (doneTemp - rawTemp);
+    }
+
+    public void CookFood(float incVal)
+    {
+        // Ignore the instruction to cook the food if the food is already done, or already burnt...
+        if (isDone || isBurnt)
         {
-            return (currentTemp - rawTemp) / (doneTemp - rawTemp);
+            return;
         }
-        else if (currentTemp > doneTemp)
+
+        currentTemp += incVal;
+        currentTemp = Mathf.Clamp(currentTemp, rawTemp, doneTemp);
+
+        float cookDegree = CalcCookDegree();
+
+        // Check if the degree is high enough to call this cooked. Not exactly 1, to account for float error.
+        if (cookDegree > 0.99f)
         {
-            return (currentTemp - doneTemp) / (burntTemp - doneTemp);
+            isDone = true;
         }
-        else
+
+        // Update color. We guaranteed at the start of this function that the food was not burnt, so we don't need to account for it here.
+        Renderer rend = GetComponent<Renderer>();
+        if (rend != null)
         {
-            return 0.5f;
+            // Color LERPed between raw and done
+            rend.material.color = Color.Lerp(rawColor, doneColor, cookDegree);
         }
     }
 
-    public void IncrementTemp(float incVal)
+    public void BurnFood()
     {
-        currentTemp += incVal;
-        currentTemp = Mathf.Clamp(currentTemp, rawTemp, burntTemp);
+        isBurnt = true;
+        isDone = false;
 
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
         {
-            float lerpVal = CalcCookDegree();
-
-            if (currentTemp < doneTemp)
-            {
-                // Color LERPed between raw and done
-                rend.material.color = Color.Lerp(rawColor, doneColor, lerpVal);
-            }
-            else
-            {
-                // Color LERPed between done and burnt
-                rend.material.color = Color.Lerp(doneColor, burntColor, lerpVal);
-            }
+            // Food is burnt; override with burnt color
+            rend.material.color = burntColor;
         }
+    }
+
+    public bool GetIsDone()
+    {
+        return isDone;
+    }
+
+    public bool GetIsBurnt()
+    {
+        return isBurnt;
     }
 }
