@@ -43,6 +43,10 @@ public class Marble : MonoBehaviour
 
         SwapFoodModel(RawObjects);
 
+        //Apply random Z rotation to fresh spawns
+        float randRot = Random.Range(0f, 360f);
+        transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, randRot));
+
         heatComp = GetComponent<Heatable>();
         Assert.IsNotNull(heatComp);
     }
