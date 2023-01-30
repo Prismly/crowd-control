@@ -13,15 +13,63 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] private GameObject activeLayout;
     [SerializeField] private GameObject pauseLayout;
-    [SerializeField] private GameObject endGameLayout;
+    [SerializeField] private GameObject winLayout;
+    [SerializeField] private GameObject loseLayout;
+
+    private bool gameIsPaused = false;
+    private bool gameIsOver = false;
 
     private void Start()
     {
         targetScoreDisp.text = LevelManager.GetLevelTargetScore(levelID).ToString();
+        GameManager.gameUIManager = this;
+        GameManager.loadedLevelID = levelID;
     }
 
     private void Update()
     {
         currentScoreDisp.text = GameManager.GetScore().ToString();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePause();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetLevel();
+        }
+    }
+
+    // If the game is paused when called, unpauses the game, and vice versa.
+    public void TogglePause()
+    {
+        gameIsPaused = !gameIsPaused;
+        Time.timeScale = gameIsPaused ? 0 : 1;
+        pauseLayout.SetActive(gameIsPaused);
+    }
+
+    public void ResetLevel()
+    {
+        Time.timeScale = 1;
+        GameManager.ResetGameVars(levelID);
+        LevelManager.PlayLevel(levelID);
+    }
+
+    public void Win()
+    {
+        // Called when the final marble is scored for the level, and the current score is sufficient to consider the level "won".
+        winLayout.SetActive(true);
+    }
+
+    public void Lose()
+    {
+        // Called when the final marble is scored for the level, and the current score is NOT ENOUGH to win.
+        loseLayout.SetActive(true);
+    }
+
+    public void BackToMain()
+    {
+        Time.timeScale = 1;
+        LevelManager.LoadMainScene();
     }
 }

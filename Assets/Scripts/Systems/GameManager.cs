@@ -14,6 +14,10 @@ public static class GameManager
     private static float burntScore = -25f;
     private static float rawScore = -5f;
 
+    private static int spawnersActive = 0;
+    private static int foodInPlay = 0;
+
+    public static InGameUI gameUIManager;
     public static void ScoreMarble(Heatable heatComp)
     {
         if (heatComp.GetIsDone() && !heatComp.GetIsBurnt())
@@ -31,6 +35,26 @@ public static class GameManager
             // Somewhat raw. Small point deduction...
             score += rawScore;
         }
+
+        // Remove 1 from the total Food Count.
+        IncFoodCount(-1);
+
+        if (spawnersActive == 0 & foodInPlay == 0)
+        {
+            // This was the last marble. Check for a win.
+            if (score >= LevelManager.GetLevelTargetScore(loadedLevelID))
+            {
+                // Score has passed target value. WIN!!!!!
+                // --- WIN ---
+                gameUIManager.Win();
+            }
+            else
+            {
+                // Score is below target value. LOSE...
+                // --- LOSE ---
+                gameUIManager.Lose();
+            }
+        }
     }
 
     public static float GetScore()
@@ -43,5 +67,19 @@ public static class GameManager
     {
         loadedLevelID = levelID;
         score = 0;
+    }
+
+    public static void IncSpawnerCount(int incVal)
+    {
+        spawnersActive += incVal;
+        // Ensure that the Spawner Count never goes below 0.
+        spawnersActive = Mathf.Clamp(spawnersActive, 0, spawnersActive);
+    }
+
+    public static void IncFoodCount(int incVal)
+    {
+        foodInPlay += incVal;
+        // Ensure that the Food Count never goes below 0.
+        foodInPlay = Mathf.Clamp(foodInPlay, 0, foodInPlay);
     }
 }

@@ -13,7 +13,7 @@ public static class LevelManager
         // Initialize the Level Data, to be used until shut down.
 
         // LEVEL 1
-        LevelData lvl1 = new LevelData("Level 1", 1000);
+        LevelData lvl1 = new LevelData("Level 1", 2000);
         // LEVEL 2
         LevelData lvl2 = new LevelData("Level2Test", 2000);
 

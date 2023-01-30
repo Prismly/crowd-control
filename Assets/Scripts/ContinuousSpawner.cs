@@ -25,6 +25,8 @@ public class ContinuousSpawner : MonoBehaviour
         spawnActive = doSpawning;
         timeSinceLastSpawn = 0.0f;
         timeSinceSpawnStart = 0.0f;
+
+        GameManager.IncSpawnerCount(doSpawning ? 1 : -1);
     }
 
     private void spawnMarble()
