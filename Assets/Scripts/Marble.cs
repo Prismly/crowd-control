@@ -10,7 +10,14 @@ public class Marble : MonoBehaviour
     public GameObject[] CookedObjects;
     public Vector3[] FoodRotations;
     public Vector3[] FoodScales;
+
+    //Particles
     public GameObject cookedFX;
+    private GameObject cookedFXInstance;
+    public GameObject partialCookedFX;
+    private GameObject partialCookedFXInstance;
+    public int partialCookedFXMaxParticles;
+    public AnimationCurve partialCookedFXParticleDensityCurve;
     public Vector3 cookedFXPositionOffset;
 
     private GameObject Food;
@@ -70,14 +77,37 @@ public class Marble : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (!becameCooked && heatComp.GetIsDone())
+        if (!becameCooked)
         {
-            SwapFoodModel(CookedObjects);
-            if(cookedFX != null)
+            if(heatComp.CalcCookDegree() > 0f)
             {
-                Instantiate(cookedFX, transform.position + cookedFXPositionOffset, Quaternion.identity);
+                if(partialCookedFXInstance == null)
+                {
+                    partialCookedFXInstance = Instantiate(partialCookedFX, transform.position + cookedFXPositionOffset, Quaternion.identity);
+                    partialCookedFXInstance.transform.parent = transform;
+                }
+                else
+                {
+                    //Increase number of particles based on how cooked we are
+                    ParticleSystem instParticleSystem = partialCookedFXInstance.GetComponent<ParticleSystem>();
+                    var instParticleSystemMain = instParticleSystem.main;
+                    instParticleSystemMain.maxParticles = (int)(partialCookedFXMaxParticles * partialCookedFXParticleDensityCurve.Evaluate(heatComp.CalcCookDegree()));
+                }
             }
-            becameCooked = true;
+            if(heatComp.GetIsDone())
+            {
+                SwapFoodModel(CookedObjects);
+                if(cookedFX != null)
+                {
+                    cookedFXInstance = Instantiate(cookedFX, transform.position + cookedFXPositionOffset, Quaternion.identity);
+                }
+                if(partialCookedFXInstance != null)
+                {
+                    Destroy(partialCookedFXInstance);
+                }
+
+                becameCooked = true;
+            }
         }
     }
 }

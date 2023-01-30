@@ -142,6 +142,59 @@ MonoBehaviour:
   - {x: 0.64, y: 0.64, z: 0.76}
   - {x: 1.55, y: 1, z: 1.25}
   cookedFX: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+  partialCookedFX: {fileID: 120410, guid: 5aaeeeac9a08f064d838fd40cf7408b7, type: 3}
+  partialCookedFXMaxParticles: 40
+  partialCookedFXParticleDensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.28261688
+      value: 0.06263657
+      inSlope: 0.91529477
+      outSlope: 0.91529477
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4825109
+      value: 0.38425782
+      inSlope: 1.6006486
+      outSlope: 1.6006486
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8325631
+      value: 0.94165933
+      inSlope: 0.970386
+      outSlope: 0.970386
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   cookedFXPositionOffset: {x: 0, y: 0, z: -1.5}
 --- !u!114 &9165225339823905069
 MonoBehaviour:
