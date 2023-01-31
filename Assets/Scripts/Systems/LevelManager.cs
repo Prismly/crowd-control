@@ -33,8 +33,9 @@ public static class LevelManager
         SceneManager.LoadScene(levels[levelNum - 1].GetSceneName());
     }
 
-    public static float GetLevelTargetScore(int levelNum)
+    public static int GetLevelTargetScore(int levelNum)
     {
+        Debug.Log(levelNum);
         return levels[levelNum - 1].GetTargetScore();
     }
 }

@@ -9,12 +9,12 @@ public class LevelData
     private string sceneName;
 
     // The minimum score required on this level to win.
-    private float targetScore;
+    private int targetScore;
 
     // The currently set high score for this level.
-    private float highScore;
+    private int highScore;
 
-    public LevelData(string sceneName, float targetScore)
+    public LevelData(string sceneName, int targetScore)
     {
         this.sceneName = sceneName;
         this.targetScore = targetScore;
@@ -25,17 +25,17 @@ public class LevelData
         return sceneName;
     }
 
-    public float GetTargetScore()
+    public int GetTargetScore()
     {
         return targetScore;
     }
 
-    public float GetHighScore()
+    public int GetHighScore()
     {
         return highScore;
     }
 
-    public void SetHighScore(float highScore)
+    public void SetHighScore(int highScore)
     {
         this.highScore = highScore;
     }
