@@ -15,11 +15,14 @@ public static class LevelManager
         // LEVEL 1
         LevelData lvl1 = new LevelData("Level 1", 2000);
         // LEVEL 2
-        LevelData lvl2 = new LevelData("Level2Test", 2000);
+        LevelData lvl2 = new LevelData("Level 2", 2000);
+        // LEVEL 3
+        LevelData lvl3 = new LevelData("Level 3", 2000);
 
-        levels = new LevelData[2];
+        levels = new LevelData[3];
         levels[0] = lvl1;
         levels[1] = lvl2;
+        levels[2] = lvl3;
     }
 
     public static void LoadMainScene()

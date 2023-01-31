@@ -2647,6 +2647,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 601751746950727985, guid: fc8fe1e0ee6205f46bdce622041202f5, type: 3}
+      propertyPath: m_Mass
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 601751746950727991, guid: fc8fe1e0ee6205f46bdce622041202f5, type: 3}
       propertyPath: m_Name
       value: Flipper_L
@@ -4668,7 +4672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a41e4130cdd43740946e1dc347e4052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelID: 1
+  levelID: 3
   currentScoreDisp: {fileID: 1746300008}
   targetScoreDisp: {fileID: 1511573066}
   activeLayout: {fileID: 515722872}
