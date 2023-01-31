@@ -34,7 +34,6 @@ public class Flipper : MonoBehaviour
         {
             hingeSpring.targetPosition = hingeLimits.min;
         }
-        Debug.Log(hingeSpring.targetPosition);
         hinge.spring = hingeSpring;
     }
 }

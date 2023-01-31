@@ -66,6 +66,8 @@ public static class GameManager
     public static void ResetGameVars(int levelID)
     {
         loadedLevelID = levelID;
+        spawnersActive = 0;
+        foodInPlay = 0;
         score = 0;
     }
 
