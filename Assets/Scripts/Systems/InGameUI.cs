@@ -8,9 +8,6 @@ public class InGameUI : MonoBehaviour
     // This is here so the level knows about its target score when started directly from the editor
     [SerializeField] private int levelID;
 
-    [SerializeField] private TextMeshProUGUI currentScoreDisp;
-    [SerializeField] private TextMeshProUGUI targetScoreDisp;
-
     [SerializeField] private GameObject activeLayout;
     [SerializeField] private GameObject pauseLayout;
     [SerializeField] private GameObject winLayout;
@@ -19,17 +16,14 @@ public class InGameUI : MonoBehaviour
     private bool gameIsPaused = false;
     private bool gameIsOver = false;
 
-    private void Start()
+    private void Awake()
     {
-        targetScoreDisp.text = LevelManager.GetLevelTargetScore(levelID).ToString();
         GameManager.gameUIManager = this;
         GameManager.loadedLevelID = levelID;
     }
 
     private void Update()
     {
-        currentScoreDisp.text = GameManager.GetScore().ToString();
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             TogglePause();

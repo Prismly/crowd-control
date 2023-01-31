@@ -9,10 +9,10 @@ public static class GameManager
     public static int loadedLevelID = -1;
 
     // The theoretical maximum number of points gained per marble, if cooked optimally.
-    private static float score = 0;
-    private static float doneScore = 100f;
-    private static float burntScore = -25f;
-    private static float rawScore = -5f;
+    private static int score = 0;
+    private static int doneScore = 100;
+    private static int burntScore = -25;
+    private static int rawScore = -5;
 
     private static int spawnersActive = 0;
     private static int foodInPlay = 0;
@@ -57,9 +57,14 @@ public static class GameManager
         }
     }
 
-    public static float GetScore()
+    public static int GetScore()
     {
         return score;
+    }
+
+    public static int GetLevelID()
+    {
+        return loadedLevelID;
     }
 
     // Clean up all variables, such that the GameManager ready to start a new level.
