@@ -12,12 +12,21 @@ public class Marble : MonoBehaviour
     public Vector3[] FoodScales;
 
     //Particles
+    //Cook
     public GameObject cookedFX;
     private GameObject cookedFXInstance;
     public GameObject partialCookedFX;
     private GameObject partialCookedFXInstance;
     public int partialCookedFXMaxParticles;
     public AnimationCurve partialCookedFXParticleDensityCurve;
+    //Burn
+    public GameObject burnedFX;
+    private GameObject burnedFXInstance;
+    public GameObject partialBurnedFX;
+    private GameObject partialBurnedFXInstance;
+    public int partialBurnedFXMaxParticles;
+    public AnimationCurve partialBurnedFXParticleDensityCurve;
+    //Offset
     public Vector3 cookedFXPositionOffset;
 
     private GameObject Food;
@@ -37,6 +46,17 @@ public class Marble : MonoBehaviour
         Food.transform.rotation *= Quaternion.Euler(FoodRotations[FoodIdx]);
         Food.transform.parent = transform;
         Food.transform.localScale = FoodScales[FoodIdx];
+    }
+
+    public void DestroyMarble()
+    {
+        //Marble is being eaten or burned. Send its cooked-ness to the Game Manager for scoring and destroy it
+        Heatable heatComp = GetComponent<Heatable>();
+        // Update the score AND check if the level is over as a result of this marble being consumed
+        GameManager.ScoreMarble(heatComp);
+
+        // Destroy the marble object
+        Destroy(gameObject);
     }
 
     // Start is called before the first frame update
@@ -67,14 +87,32 @@ public class Marble : MonoBehaviour
     {
         if (gameObject.transform.position.y < DespawnHeightY)
         {
-            // Marble is sufficiently low enough to be eaten; send its cooked-ness to the Game Manager for scoring and destroy it
+            // Marble is sufficiently low enough to be eaten;
+            DestroyMarble();
+        }
 
-            Heatable heatComp = GetComponent<Heatable>();
-            // Update the score AND check if the level is over as a result of this marble being consumed
-            GameManager.ScoreMarble(heatComp);
-
-            // Destroy the marble object
-            Destroy(gameObject);
+        if(heatComp.GetIsBurnt())
+        {
+            burnedFXInstance = Instantiate(burnedFX, transform.position + cookedFXPositionOffset, Quaternion.identity);
+            DestroyMarble();
+        }
+        else
+        {
+            if(heatComp.CalcBurnDegree() > 0f)
+            {
+                if(partialBurnedFXInstance == null)
+                {
+                    partialBurnedFXInstance = Instantiate(partialBurnedFX, transform.position + cookedFXPositionOffset, Quaternion.identity);
+                    partialBurnedFXInstance.transform.parent = transform;
+                }
+                else
+                {
+                    //Increase number of particles based on how burned we are
+                    ParticleSystem instParticleSystem = partialBurnedFXInstance.GetComponent<ParticleSystem>();
+                    var instParticleSystemMain = instParticleSystem.main;
+                    instParticleSystemMain.maxParticles = (int)(partialBurnedFXMaxParticles * partialBurnedFXParticleDensityCurve.Evaluate(heatComp.CalcBurnDegree()));
+                }
+            }
         }
 
         if (!becameCooked)

@@ -195,6 +195,33 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  burnedFX: {fileID: 120410, guid: 03fc5d116380b2e40bd9c64e7b78ebc7, type: 3}
+  partialBurnedFX: {fileID: 120410, guid: a3e8179836917a24f8a205754a595076, type: 3}
+  partialBurnedFXMaxParticles: 60
+  partialBurnedFXParticleDensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   cookedFXPositionOffset: {x: 0, y: 0, z: -1.5}
 --- !u!114 &9165225339823905069
 MonoBehaviour:
@@ -210,3 +237,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rawTemp: 0
   doneTemp: 100
+  burnedAmt: 100

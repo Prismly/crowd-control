@@ -7,6 +7,9 @@ public class Heatable : MonoBehaviour
     [SerializeField] private float rawTemp;
     private float currentTemp;
     [SerializeField] private float doneTemp;
+    [SerializeField] private float burnedAmt;
+    private float currentBurnAmt;
+
 
     private bool isDone = false;
     private bool isBurnt = false;
@@ -18,6 +21,7 @@ public class Heatable : MonoBehaviour
     private void Start()
     {
         currentTemp = rawTemp;
+        currentBurnAmt = 0f;
 
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
@@ -27,10 +31,15 @@ public class Heatable : MonoBehaviour
     }
 
     // Calculate the "cook degree", a value from 0 to 1 that represents how close to being done (1.0) a Heatable is.
-    // This value is used for determining the Heatable's color.
+    // This value is used for determining VFX related to cooked-ness
     public float CalcCookDegree()
     {
         return (currentTemp - rawTemp) / (doneTemp - rawTemp);
+    }
+
+    public float CalcBurnDegree()
+    {
+        return currentBurnAmt / burnedAmt;
     }
 
     public void CookFood(float incVal)
@@ -61,10 +70,20 @@ public class Heatable : MonoBehaviour
         }
     }
 
-    public void BurnFood()
+    public void BurnFood(float incVal)
     {
-        isBurnt = true;
-        isDone = false;
+
+        currentBurnAmt += incVal;
+        currentBurnAmt = Mathf.Clamp(currentBurnAmt, 0, burnedAmt);
+
+        float burnDegree = CalcBurnDegree();
+
+        // Check if the degree is high enough to call this burned. Not exactly 1, to account for float error.
+        if (burnDegree > 0.99f)
+        {
+            isDone = false;
+            isBurnt = true;
+        }
 
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
