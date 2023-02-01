@@ -21,6 +21,8 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject mainMenuLayout;
     [SerializeField] private GameObject levelSelectLayout;
 
+    [SerializeField] private OvenExterior ovenMatSelector;
+
     [SerializeField] private MenuRotation menuRot;
     [SerializeField] private LevelMenuScroller lvlMenuScrl;
     [SerializeField] private TextMeshProUGUI levelNameText;
@@ -65,6 +67,7 @@ public class MainMenuUI : MonoBehaviour
     {
         selectedLevelNum = levelNum;
         levelNameText.text = LevelManager.GetLevelName(selectedLevelNum);
+        ovenMatSelector.UseMatForLvl(levelNum);
     }
 
     // Called by UI to activate the Level Select layout.
