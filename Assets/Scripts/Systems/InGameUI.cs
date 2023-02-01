@@ -14,7 +14,6 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject loseLayout;
 
     private bool gameIsPaused = false;
-    private bool gameIsOver = false;
 
     private void Awake()
     {

@@ -18,6 +18,7 @@ public static class GameManager
     private static int foodInPlay = 0;
 
     public static InGameUI gameUIManager;
+    public static InGameAnimation gameAnimManager;
     public static void ScoreMarble(Heatable heatComp)
     {
         if (heatComp.GetIsDone() && !heatComp.GetIsBurnt())
@@ -53,6 +54,7 @@ public static class GameManager
                 // Score is below target value. LOSE...
                 // --- LOSE ---
                 gameUIManager.Lose();
+                gameAnimManager.HideSlime();
             }
         }
     }
