@@ -52,6 +52,11 @@ public class InGameUI : MonoBehaviour
     {
         // Called when the final marble is scored for the level, and the current score is sufficient to consider the level "won".
         winLayout.SetActive(true);
+        // If current score beats the current high score, overwrite previous high score
+        if (GameManager.GetScore() > LevelManager.GetLevelHighScore(levelID))
+        {
+            LevelManager.SetLevelHighScore(levelID, GameManager.GetScore());
+        }
     }
 
     public void Lose()

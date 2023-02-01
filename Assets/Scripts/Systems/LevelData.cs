@@ -14,13 +14,14 @@ public class LevelData
     private int targetScore;
 
     // The currently set high score for this level.
-    private int highScore;
+    private int highScore = 0;
 
-    public LevelData(string sceneName, string levelName, int targetScore)
+    public LevelData(string sceneName, string levelName, int targetScore, int highScore)
     {
         this.sceneName = sceneName;
         this.levelName = levelName;
         this.targetScore = targetScore;
+        this.highScore = highScore;
     }
 
     public string GetSceneName()

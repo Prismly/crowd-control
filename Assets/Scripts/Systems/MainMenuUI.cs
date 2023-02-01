@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 // Contains functionality for UI elements of the Main Menu and Level Select portions of the game's startup Scene.
@@ -20,6 +21,9 @@ public class MainMenuUI : MonoBehaviour
     // Container objects for activating/deactivating UI layouts.
     [SerializeField] private GameObject mainMenuLayout;
     [SerializeField] private GameObject levelSelectLayout;
+    [SerializeField] private GameObject settingsLayout;
+
+    [SerializeField] private Slider volumeSlider;
 
     [SerializeField] private OvenExterior ovenMatSelector;
 
@@ -68,6 +72,7 @@ public class MainMenuUI : MonoBehaviour
         selectedLevelNum = levelNum;
         levelNameText.text = LevelManager.GetLevelName(selectedLevelNum);
         ovenMatSelector.UseMatForLvl(levelNum);
+        GameManager.loadedLevelID = levelNum;
     }
 
     // Called by UI to activate the Level Select layout.
@@ -75,6 +80,7 @@ public class MainMenuUI : MonoBehaviour
     {
         mainMenuLayout.SetActive(false);
         levelSelectLayout.SetActive(true);
+        settingsLayout.SetActive(false);
         menuRot.SetRotPerSec(Vector3.zero);
     }
 
@@ -83,7 +89,17 @@ public class MainMenuUI : MonoBehaviour
     {
         mainMenuLayout.SetActive(true);
         levelSelectLayout.SetActive(false);
+        settingsLayout.SetActive(false);
         menuRot.SetRotPerSec(new Vector3(0, 20, 0));
+    }
+
+    // Called by UI to activate the Settings layout.
+    public void SwitchToSettings()
+    {
+        mainMenuLayout.SetActive(false);
+        levelSelectLayout.SetActive(false);
+        settingsLayout.SetActive(true);
+        menuRot.SetRotPerSec(new Vector3(0, 10, 0));
     }
 
     // Called by UI to start a level.
@@ -101,5 +117,10 @@ public class MainMenuUI : MonoBehaviour
     public void CloseApplication()
     {
         Application.Quit();
+    }
+
+    public void UpdateVolumeSetting()
+    {
+        PlayerSettings.volume = (int)volumeSlider.value;
     }
 }
