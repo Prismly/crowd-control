@@ -29,7 +29,7 @@ public class MainMenuUI : MonoBehaviour
 
     [SerializeField] private MenuRotation menuRot;
     [SerializeField] private LevelMenuScroller lvlMenuScrl;
-    [SerializeField] private TextMeshProUGUI levelNameText;
+    [SerializeField] private BobbingText levelNameText;
 
     private int selectedLevelNum = 1;
 
@@ -70,7 +70,7 @@ public class MainMenuUI : MonoBehaviour
     private void SelectLevel(int levelNum)
     {
         selectedLevelNum = levelNum;
-        levelNameText.text = LevelManager.GetLevelName(selectedLevelNum);
+        levelNameText.SetText(LevelManager.GetLevelName(selectedLevelNum));
         ovenMatSelector.UseMatForLvl(levelNum);
         GameManager.loadedLevelID = levelNum;
     }

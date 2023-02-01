@@ -13,6 +13,7 @@ public class BobbingText : MonoBehaviour
     [SerializeField] private float padding;
     [SerializeField] private float fontSize;
     [SerializeField] private AppendValue appendValType;
+    [SerializeField] private TextAlign textAlignType;
 
     private enum AppendValue
     {
@@ -20,6 +21,12 @@ public class BobbingText : MonoBehaviour
         SCORE,
         TARGET_SCORE,
         HIGH_SCORE
+    }
+
+    private enum TextAlign
+    {
+        LEFT,
+        MIDDLE
     }
 
     private void Start()
@@ -30,6 +37,12 @@ public class BobbingText : MonoBehaviour
     private void Update()
     {
         RefreshSprites(false);
+    }
+
+    public void SetText(string newText)
+    {
+        text = newText;
+        RefreshSprites(true);
     }
 
     private bool UpdateAppendValue()
@@ -69,7 +82,15 @@ public class BobbingText : MonoBehaviour
         // The append value has changed! We need to refresh sprites
 
         // Update underlying text
-        string fullText = text + appendVal;
+        string fullText;
+        if (appendValType == AppendValue.NONE)
+        {
+            fullText = text;
+        }
+        else
+        {
+            fullText = text + appendVal;
+        }
         
         // Update number of images to fill and their positions on the canvas
         UpdateImageCount(fullText);
@@ -111,10 +132,21 @@ public class BobbingText : MonoBehaviour
         RectTransform myRect = GetComponent<RectTransform>();
         Vector2 myPos = myRect.anchoredPosition;
 
-        for (int i = 0; i < digits.Count; i++)
+        if (textAlignType == TextAlign.LEFT)
         {
-            RectTransform digitRect = digits[i].GetComponent<RectTransform>();
-            digitRect.anchoredPosition = (Vector2.right * digitRect.sizeDelta.x * i);
+            for (int i = 0; i < digits.Count; i++)
+            {
+                RectTransform digitRect = digits[i].GetComponent<RectTransform>();
+                digitRect.anchoredPosition = Vector2.right * digitRect.sizeDelta.x * i;
+            }
+        }
+        else if (textAlignType == TextAlign.MIDDLE)
+        {
+            for (int i = 0; i < digits.Count; i++)
+            {
+                RectTransform digitRect = digits[i].GetComponent<RectTransform>();
+                digitRect.anchoredPosition = Vector2.right * ((digitRect.sizeDelta.x * i) - digitRect.sizeDelta.x * 0.5f * (digits.Count - 1f));
+            }
         }
     }
 }
