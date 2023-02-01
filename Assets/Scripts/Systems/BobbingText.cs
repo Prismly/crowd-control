@@ -18,7 +18,8 @@ public class BobbingText : MonoBehaviour
     {
         NONE,
         SCORE,
-        TARGET_SCORE
+        TARGET_SCORE,
+        HIGH_SCORE
     }
 
     private void Start()
@@ -45,6 +46,12 @@ public class BobbingText : MonoBehaviour
                 {
                     bool changed = appendVal != LevelManager.GetLevelTargetScore(GameManager.GetLevelID());
                     appendVal = LevelManager.GetLevelTargetScore(GameManager.GetLevelID());
+                    return changed;
+                }
+            case AppendValue.HIGH_SCORE:
+                {
+                    bool changed = appendVal != LevelManager.GetLevelHighScore(GameManager.GetLevelID());
+                    appendVal = LevelManager.GetLevelHighScore(GameManager.GetLevelID());
                     return changed;
                 }
         }
@@ -107,7 +114,7 @@ public class BobbingText : MonoBehaviour
         for (int i = 0; i < digits.Count; i++)
         {
             RectTransform digitRect = digits[i].GetComponent<RectTransform>();
-            digitRect.anchoredPosition = myPos + (Vector2.right * digitRect.sizeDelta.x * i);
+            digitRect.anchoredPosition = (Vector2.right * digitRect.sizeDelta.x * i);
         }
     }
 }
