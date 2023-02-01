@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.015267528, g: 0.07473959, b: 0.14789164, a: 1}
+  m_IndirectSpecularColor: {r: 0.015106584, g: 0.074578516, b: 0.14773016, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1372,6 +1372,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3939876528331385386, guid: 7569b83ea67ed604d8f895155b8d4732, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 88f5c6d81af2447a2bd953a586810621, type: 2}
     - target: {fileID: 3939876528331385391, guid: 7569b83ea67ed604d8f895155b8d4732, type: 3}
       propertyPath: m_Name
       value: RotPaddle_R
