@@ -13,11 +13,11 @@ public static class LevelManager
         // Initialize the Level Data, to be used until shut down.
 
         // LEVEL 1
-        LevelData lvl1 = new LevelData("Level 1", 2000);
+        LevelData lvl1 = new LevelData("Level 1", "(Level 1 Name)", 2000);
         // LEVEL 2
-        LevelData lvl2 = new LevelData("Level 2", 2000);
+        LevelData lvl2 = new LevelData("Level 2", "(Level 2 Name)", 2000);
         // LEVEL 3
-        LevelData lvl3 = new LevelData("Level 3", 2000);
+        LevelData lvl3 = new LevelData("Level 3", "(Level 3 Name)", 2000);
 
         levels = new LevelData[3];
         levels[0] = lvl1;
@@ -40,5 +40,15 @@ public static class LevelManager
     {
         Debug.Log(levelNum);
         return levels[levelNum - 1].GetTargetScore();
+    }
+
+    public static string GetLevelName(int levelNum)
+    {
+        return levels[levelNum - 1].GetLevelName();
+    }
+
+    public static int GetLevelCount()
+    {
+        return levels.Length;
     }
 }

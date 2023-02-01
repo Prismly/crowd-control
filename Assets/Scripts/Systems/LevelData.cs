@@ -8,15 +8,18 @@ public class LevelData
     // The name of this level's corresponding scene, so LevelManager can load that scene when needed.
     private string sceneName;
 
+    private string levelName;
+
     // The minimum score required on this level to win.
     private int targetScore;
 
     // The currently set high score for this level.
     private int highScore;
 
-    public LevelData(string sceneName, int targetScore)
+    public LevelData(string sceneName, string levelName, int targetScore)
     {
         this.sceneName = sceneName;
+        this.levelName = levelName;
         this.targetScore = targetScore;
     }
 
@@ -33,6 +36,11 @@ public class LevelData
     public int GetHighScore()
     {
         return highScore;
+    }
+
+    public string GetLevelName()
+    {
+        return levelName;
     }
 
     public void SetHighScore(int highScore)
