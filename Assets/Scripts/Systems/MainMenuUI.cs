@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // Contains functionality for UI elements of the Main Menu and Level Select portions of the game's startup Scene.
 public class MainMenuUI : MonoBehaviour
@@ -20,43 +21,77 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject mainMenuLayout;
     [SerializeField] private GameObject levelSelectLayout;
 
+    [SerializeField] private MenuRotation menuRot;
+    [SerializeField] private LevelMenuScroller lvlMenuScrl;
+    [SerializeField] private TextMeshProUGUI levelNameText;
+
+    private int selectedLevelNum = 1;
+
     private void Start()
     {
+        SelectLevel(1);
         if (!loadIntoLevelSelect)
         {
             // First load-up; boot up on main menu
-            ActivateLayout(MAIN_MENU_STATE.MAIN);
+            SwitchToMain();
         }
         else
         {
             // Subsequent load-up; boot up in level select
-            ActivateLayout(MAIN_MENU_STATE.L_SELECT);
+            SwitchToLevelSelect();
         }
     }
 
-    // Makes the given layout visible, and the other invisible. Ignores which is already visible.
-    private void ActivateLayout(MAIN_MENU_STATE targetLayout)
+    // moveInc is -1 if selecting the previous level, and 1 otherwise
+    public void SelectAdjacentLevel(int moveInc)
     {
-        mainMenuLayout.SetActive(targetLayout == MAIN_MENU_STATE.MAIN);
-        levelSelectLayout.SetActive(targetLayout == MAIN_MENU_STATE.L_SELECT);
+        int newSelected = selectedLevelNum + moveInc;
+        if (newSelected < 1 || newSelected > LevelManager.GetLevelCount())
+        {
+            // Tried to select out of bounds!
+            return;
+        }
+
+        // Selecting in-bounds
+        SelectLevel(newSelected);
+
+        // Spin
+        menuRot.SetRotIsNegative(new Vector3Int(1, moveInc, 1));
+        menuRot.SwivelAndSlow(new Vector3(0, 40, 0));
+        //lvlMenuScrl.EnableScroll(moveInc);
+    }
+
+    private void SelectLevel(int levelNum)
+    {
+        selectedLevelNum = levelNum;
+        levelNameText.text = LevelManager.GetLevelName(selectedLevelNum);
     }
 
     // Called by UI to activate the Level Select layout.
     public void SwitchToLevelSelect()
     {
-        ActivateLayout(MAIN_MENU_STATE.L_SELECT);
+        mainMenuLayout.SetActive(false);
+        levelSelectLayout.SetActive(true);
+        menuRot.SetRotPerSec(Vector3.zero);
     }
 
     // Called by UI to activate the Main Menu layout.
     public void SwitchToMain()
     {
-        ActivateLayout(MAIN_MENU_STATE.MAIN);
+        mainMenuLayout.SetActive(true);
+        levelSelectLayout.SetActive(false);
+        menuRot.SetRotPerSec(new Vector3(0, 20, 0));
     }
 
     // Called by UI to start a level.
     public void LoadLevel(int levelNum)
     {
         LevelManager.PlayLevel(levelNum);
+    }
+
+    public void LoadSelectedLevel()
+    {
+        LevelManager.PlayLevel(selectedLevelNum);
     }
 
     // Called by UI to close the game.
