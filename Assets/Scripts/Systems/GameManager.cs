@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public static class GameManager
 {
     // The number of the level currently being played.
-    public static int loadedLevelID = -1;
+    public static int loadedLevelID = 1;
 
     // The theoretical maximum number of points gained per marble, if cooked optimally.
     private static int score = 0;

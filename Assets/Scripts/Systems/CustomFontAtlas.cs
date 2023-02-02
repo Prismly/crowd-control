@@ -23,6 +23,11 @@ public class CustomFontAtlas : MonoBehaviour
             // Uppercase letter.
             return char_uppers[target - 'A'];
         }
+        else if (target >= 'a' && target <= 'z')
+        {
+            // Uppercase letter.
+            return char_uppers[target - 'a'];
+        }
         else if (target == ':')
         {
             return char_colon;

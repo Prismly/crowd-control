@@ -13,11 +13,11 @@ public static class LevelManager
         // Initialize the Level Data, to be used until shut down.
 
         // LEVEL 1
-        LevelData lvl1 = new LevelData("Level 1", "Easy Bake", 1000, PlayerPrefs.GetInt("Level1"));
+        LevelData lvl1 = new LevelData("Level 1", "1 - Easy Bake", 1000, PlayerPrefs.GetInt("Level1"));
         // LEVEL 2
-        LevelData lvl2 = new LevelData("Level 2", "(Level 2 Name)", 1500, PlayerPrefs.GetInt("Level2"));
+        LevelData lvl2 = new LevelData("Level 2", "2 - Space Heater", 1500, PlayerPrefs.GetInt("Level2"));
         // LEVEL 3
-        LevelData lvl3 = new LevelData("Level 3", "Superspace Heater", 2000, PlayerPrefs.GetInt("Level3"));
+        LevelData lvl3 = new LevelData("Level 3", "3 - Bake-inator", 2000, PlayerPrefs.GetInt("Level3"));
 
         levels = new LevelData[3];
         levels[0] = lvl1;
