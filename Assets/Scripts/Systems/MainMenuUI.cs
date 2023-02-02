@@ -113,6 +113,7 @@ public class MainMenuUI : MonoBehaviour
     }
 
     // Called by UI to start a level.
+    // I think this became deprecated actually but I'm leaving it in just in case
     public void LoadLevel(int levelNum)
     {
         LevelManager.PlayLevel(levelNum);

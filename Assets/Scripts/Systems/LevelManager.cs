@@ -18,11 +18,14 @@ public static class LevelManager
         LevelData lvl2 = new LevelData("Level 2", "2 - Space Heater", 1500, PlayerPrefs.GetInt("Level2"));
         // LEVEL 3
         LevelData lvl3 = new LevelData("Level 3", "3 - Bake-inator", 2000, PlayerPrefs.GetInt("Level3"));
+        // LEVEL 4
+        LevelData lvl4 = new LevelData("Level 4", "4 - Why do they call it oven when you of in the cold food of out hot eat the food", 1000, PlayerPrefs.GetInt("Level4"));
 
-        levels = new LevelData[3];
+        levels = new LevelData[4];
         levels[0] = lvl1;
         levels[1] = lvl2;
         levels[2] = lvl3;
+        levels[3] = lvl4;
     }
 
     public static void LoadMainScene()
