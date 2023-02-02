@@ -266,7 +266,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f1c9fe1912a72a14087b1d8c07837a29, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -838,7 +838,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 11426ea3dc0b1984196396067f576215, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1467,6 +1467,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1670758007}
     m_Modifications:
+    - target: {fileID: 732955750139328192, guid: 27a0e8b83ec236e42963ac3432003d51, type: 3}
+      propertyPath: levelID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 732955750139328192, guid: 27a0e8b83ec236e42963ac3432003d51, type: 3}
       propertyPath: winSoundSrc
       value: 
