@@ -15,7 +15,7 @@ public class Bobbing : MonoBehaviour
     private void Start()
     {
         myRect = GetComponent<RectTransform>();
-        homePos = myRect.localPosition;
+        homePos = myRect.anchoredPosition;
     }
 
     private void Update()
@@ -29,6 +29,6 @@ public class Bobbing : MonoBehaviour
         }
 
         float vertOffset = Mathf.Sin(cycleProg) * cycleAmp;
-        myRect.localPosition = homePos + (Vector3.up * vertOffset);
+        myRect.anchoredPosition = homePos + (Vector3.up * vertOffset);
     }
 }

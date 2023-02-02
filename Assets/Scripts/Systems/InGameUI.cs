@@ -17,6 +17,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private AudioSource loseSoundSrc;
 
     private bool gameIsPaused = false;
+    private bool gameIsOver = false;
 
     private void Awake()
     {
@@ -39,6 +40,10 @@ public class InGameUI : MonoBehaviour
     // If the game is paused when called, unpauses the game, and vice versa.
     public void TogglePause()
     {
+        if (!gameIsPaused && gameIsOver)
+        {
+            return;
+        }
         gameIsPaused = !gameIsPaused;
         Time.timeScale = gameIsPaused ? 0 : 1;
         pauseLayout.SetActive(gameIsPaused);
@@ -49,10 +54,13 @@ public class InGameUI : MonoBehaviour
         Time.timeScale = 1;
         GameManager.ResetGameVars(levelID);
         LevelManager.PlayLevel(levelID);
+        gameIsOver = false;
+        gameIsPaused = false;
     }
 
     public void Win()
     {
+        gameIsOver = true;
         winSoundSrc.Play();
         // Called when the final marble is scored for the level, and the current score is sufficient to consider the level "won".
         winLayout.SetActive(true);
@@ -65,6 +73,7 @@ public class InGameUI : MonoBehaviour
 
     public void Lose()
     {
+        gameIsOver = true;
         loseSoundSrc.Play();
         // Called when the final marble is scored for the level, and the current score is NOT ENOUGH to win.
         loseLayout.SetActive(true);
