@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class PersistentObject : MonoBehaviour
 {
+    public string UniqueTag;
+
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.tag = "Persistent";
+        gameObject.tag = UniqueTag;
 
-        //Check if there's already a manager present
-        GameObject[] persistents = GameObject.FindGameObjectsWithTag("Persistent");
+        //Check if there's already a persistent object w/ this tag present
+        GameObject[] persistents = GameObject.FindGameObjectsWithTag(UniqueTag);
         if(persistents.Length > 1)
         {
             //If so, self destruct
             Destroy(gameObject);
         }
 
-
+        //Otherwise, persist
         DontDestroyOnLoad(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
