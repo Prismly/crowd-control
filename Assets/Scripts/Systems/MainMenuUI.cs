@@ -31,6 +31,8 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private LevelMenuScroller lvlMenuScrl;
     [SerializeField] private BobbingText levelNameText;
 
+    [SerializeField] private AudioSource levelSelectSwoosh;
+
     private int selectedLevelNum = 1;
 
     private void Start()
@@ -57,6 +59,8 @@ public class MainMenuUI : MonoBehaviour
             // Tried to select out of bounds!
             return;
         }
+
+        levelSelectSwoosh.Play();
 
         // Selecting in-bounds
         SelectLevel(newSelected);
