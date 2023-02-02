@@ -13,6 +13,9 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject winLayout;
     [SerializeField] private GameObject loseLayout;
 
+    [SerializeField] private AudioSource winSoundSrc;
+    [SerializeField] private AudioSource loseSoundSrc;
+
     private bool gameIsPaused = false;
 
     private void Awake()
@@ -23,7 +26,7 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
         }
@@ -50,6 +53,7 @@ public class InGameUI : MonoBehaviour
 
     public void Win()
     {
+        winSoundSrc.Play();
         // Called when the final marble is scored for the level, and the current score is sufficient to consider the level "won".
         winLayout.SetActive(true);
         // If current score beats the current high score, overwrite previous high score
@@ -61,6 +65,7 @@ public class InGameUI : MonoBehaviour
 
     public void Lose()
     {
+        loseSoundSrc.Play();
         // Called when the final marble is scored for the level, and the current score is NOT ENOUGH to win.
         loseLayout.SetActive(true);
     }
