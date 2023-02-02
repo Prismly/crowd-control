@@ -131,10 +131,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1670758007}
     m_Modifications:
     - target: {fileID: 732955750139328192, guid: 27a0e8b83ec236e42963ac3432003d51, type: 3}
-      propertyPath: levelID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 732955750139328192, guid: 27a0e8b83ec236e42963ac3432003d51, type: 3}
       propertyPath: winSoundSrc
       value: 
       objectReference: {fileID: 1969878331}
@@ -1058,7 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
