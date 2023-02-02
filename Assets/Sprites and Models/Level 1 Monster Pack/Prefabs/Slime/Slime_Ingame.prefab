@@ -603,6 +603,7 @@ GameObject:
   - component: {fileID: 3704982957273794373}
   - component: {fileID: 6985248359744450628}
   - component: {fileID: 2232940200719981310}
+  - component: {fileID: 8726022710631265335}
   m_Layer: 0
   m_Name: Slime_Ingame
   m_TagString: Untagged
@@ -793,6 +794,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8726022710631265335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000014251014320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c218c1de9198a74895dadfb9f00acaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &879396367135562758
 GameObject:
   m_ObjectHideFlags: 0

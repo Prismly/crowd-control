@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class PlayerSettings
 {
-    public static int volume;
+    public static int volume = 50;
 }
