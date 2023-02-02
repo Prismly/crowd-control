@@ -15,8 +15,11 @@ public class MainMenuUI : MonoBehaviour
     private enum MAIN_MENU_STATE
     {
         MAIN,
-        L_SELECT
+        L_SELECT,
+        SETTINGS
     }
+
+    private MAIN_MENU_STATE menuState = MAIN_MENU_STATE.MAIN;
 
     // Container objects for activating/deactivating UI layouts.
     [SerializeField] private GameObject mainMenuLayout;
@@ -82,6 +85,7 @@ public class MainMenuUI : MonoBehaviour
     // Called by UI to activate the Level Select layout.
     public void SwitchToLevelSelect()
     {
+        menuState = MAIN_MENU_STATE.L_SELECT;
         mainMenuLayout.SetActive(false);
         levelSelectLayout.SetActive(true);
         settingsLayout.SetActive(false);
@@ -91,6 +95,7 @@ public class MainMenuUI : MonoBehaviour
     // Called by UI to activate the Main Menu layout.
     public void SwitchToMain()
     {
+        menuState = MAIN_MENU_STATE.MAIN;
         mainMenuLayout.SetActive(true);
         levelSelectLayout.SetActive(false);
         settingsLayout.SetActive(false);
@@ -100,6 +105,7 @@ public class MainMenuUI : MonoBehaviour
     // Called by UI to activate the Settings layout.
     public void SwitchToSettings()
     {
+        menuState = MAIN_MENU_STATE.SETTINGS;
         mainMenuLayout.SetActive(false);
         levelSelectLayout.SetActive(false);
         settingsLayout.SetActive(true);
@@ -126,5 +132,20 @@ public class MainMenuUI : MonoBehaviour
     public void UpdateVolumeSetting()
     {
         PlayerSettings.volume = (int)volumeSlider.value;
+    }
+
+    private void Update()
+    {
+        if (menuState == MAIN_MENU_STATE.L_SELECT)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            {
+                SelectAdjacentLevel(-1);
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            {
+                SelectAdjacentLevel(1);
+            }
+        }
     }
 }
