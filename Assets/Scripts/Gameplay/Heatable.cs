@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Heatable : MonoBehaviour
 {
+    [SerializeField] private AudioSource poofSound;
+
     [SerializeField] private float rawTemp;
     private float currentTemp;
     [SerializeField] private float doneTemp;
@@ -58,6 +60,7 @@ public class Heatable : MonoBehaviour
         // Check if the degree is high enough to call this cooked. Not exactly 1, to account for float error.
         if (cookDegree > 0.99f)
         {
+            poofSound.Play();
             isDone = true;
         }
 
@@ -72,7 +75,6 @@ public class Heatable : MonoBehaviour
 
     public void BurnFood(float incVal)
     {
-
         currentBurnAmt += incVal;
         currentBurnAmt = Mathf.Clamp(currentBurnAmt, 0, burnedAmt);
 

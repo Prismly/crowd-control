@@ -5,7 +5,7 @@ using UnityEngine;
 public class VolumeAdjuster : MonoBehaviour
 {
     private AudioSource mySrc;
-
+    [SerializeField] private float volumeFactor = 1f;
     private void Start()
     {
         mySrc = GetComponent<AudioSource>();
@@ -13,6 +13,6 @@ public class VolumeAdjuster : MonoBehaviour
 
     private void Update()
     {
-        mySrc.volume = PlayerSettings.volume / 100f;
+        mySrc.volume = PlayerSettings.volume / 100f * volumeFactor;
     }
 }
